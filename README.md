@@ -1,2 +1,2 @@
-# clac_java
+# calc_java
 Calculator written in java
