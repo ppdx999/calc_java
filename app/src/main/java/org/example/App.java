@@ -3,12 +3,19 @@
  */
 package org.example;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import java.util.Scanner;
 
+public class App {
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        try (var scanner = new Scanner(System.in)) {
+            var input = scanner.tokens().toString();
+            System.out.println(expr(input));
+        }
+    };
+
+    public static int expr(String input) {
+        var parser = new Parser(input);
+        ASTNode ast = parser.parse();
+        return ast.evaluate();
     }
 }
