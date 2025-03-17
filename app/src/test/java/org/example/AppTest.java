@@ -47,23 +47,23 @@ class AppTest {
     // ✅ 演算子の優先順位
     @Test
     void OperatorPrecedence() {
-        assertEquals(14, App.expr("2+3*4"));  // 2 + (3*4) = 14
-        assertEquals(6, App.expr("2*3+0"));   // (2*3) + 0 = 6
-        assertEquals(1, App.expr("2-3+2"));   // (2-3) + 2 = 1
+        assertEquals(14, App.expr("2+3*4")); // 2 + (3*4) = 14
+        assertEquals(6, App.expr("2*3+0")); // (2*3) + 0 = 6
+        assertEquals(1, App.expr("2-3+2")); // (2-3) + 2 = 1
     }
 
     // ✅ 括弧を使った計算
     @Test
     void Parentheses() {
         assertEquals(20, App.expr("(2+3)*4")); // (2+3) * 4 = 20
-        assertEquals(5, App.expr("(10-5)"));   // (10-5) = 5
+        assertEquals(5, App.expr("(10-5)")); // (10-5) = 5
         assertEquals(8, App.expr("(2+2)+(3+1)")); // (2+2) + (3+1) = 8
     }
 
     // ✅ 空白を含むケース
     @Test
     void IgnoreWhitespace() {
-        assertEquals(14, App.expr(" 2 + 3 * 4 "));   // 空白を無視
+        assertEquals(14, App.expr(" 2 + 3 * 4 ")); // 空白を無視
         assertEquals(20, App.expr(" ( 2 + 3 ) * 4")); // 空白を無視
     }
 
