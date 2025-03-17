@@ -13,7 +13,7 @@ public class App {
         }
     };
 
-    private static StringBuffer readAll(Scanner scanner){
+    private static StringBuffer readAll(Scanner scanner) {
         var sb = new StringBuffer();
         while (scanner.hasNext()) {
             sb.append(scanner.next());
@@ -21,17 +21,15 @@ public class App {
         return sb;
     }
 
-    private static int _expr(String input) {
-        var parser = new Parser(input);
-        ASTNode ast = parser.parse();
-        return ast.evaluate();
-    }
-
     public static int expr(StringBuffer input) {
-        return _expr(input.toString());
+        return expr(input.toString());
     }
 
     public static int expr(String input) {
-        return _expr(input);
+        var parser = new Parser(input);
+        var ast = parser.parse();
+        var evaluator = new Evaluator();
+
+        return ast.accept(evaluator);
     }
 }

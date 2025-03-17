@@ -26,37 +26,37 @@ public class Parser {
     }
 
 
-    public ASTNode parse() {
+    public Ast parse() {
         return parseExpression();
     }
 
 
-    private ASTNode parseExpression() {
-        ASTNode left = parseTerm();
+    private Ast parseExpression() {
+        Ast left = parseTerm();
         while (currentChar == '+' || currentChar == '-') {
             char op = currentChar;
             nextChar();
-            ASTNode right = parseTerm();
-            left = new BinaryOpNode(op, left, right);
+            Ast right = parseTerm();
+            left = new Ast.BinaryOp(op, left, right);
         }
         return left;
     }
 
-    private ASTNode parseTerm() {
-        ASTNode left = parseFactor();
+    private Ast parseTerm() {
+        Ast left = parseFactor();
         while (currentChar == '*' || currentChar == '/') {
             char op = currentChar;
             nextChar();
-            ASTNode right = parseFactor();
-            left = new BinaryOpNode(op, left, right);
+            Ast right = parseFactor();
+            left = new Ast.BinaryOp(op, left, right);
         }
         return left;
     }
 
-    private ASTNode parseFactor() {
+    private Ast parseFactor() {
         if (currentChar == '(') {
             nextChar();
-            ASTNode node = parseExpression();
+            Ast node = parseExpression();
             if (currentChar == ')') {
                 nextChar();
                 return node;
@@ -71,11 +71,11 @@ public class Parser {
     }
 
 
-    private ASTNode parseNumber() {
+    private Ast parseNumber() {
         int start = pos;
         while (Character.isDigit(currentChar)) {
             nextChar();
         }
-        return new NumberNode(Integer.parseInt(input.substring(start, pos)));
+        return new Ast.Number(Integer.parseInt(input.substring(start, pos)));
     }
 }
